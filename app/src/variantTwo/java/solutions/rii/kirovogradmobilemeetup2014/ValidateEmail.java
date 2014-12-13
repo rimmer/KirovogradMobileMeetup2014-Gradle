@@ -7,6 +7,6 @@ package solutions.rii.kirovogradmobilemeetup2014;
  */
 public class ValidateEmail {
     public static boolean validate(String email) {
-        return email.contains("foo");
+        return email.contains("bar");
     }
 }

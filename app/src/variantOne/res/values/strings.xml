@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Variant One App</string>
+    <string name="error_validation">Word foo should be present in email</string>
+</resources>

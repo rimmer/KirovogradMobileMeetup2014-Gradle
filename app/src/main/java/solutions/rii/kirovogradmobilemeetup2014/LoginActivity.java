@@ -112,6 +112,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         boolean cancel = false;
         View focusView = null;
 
+        if (!ValidateEmail.validate(email)) {
+            mEmailView.setError(getText(R.string.error_validation));
+            focusView = mEmailView;
+            cancel = true;
+        }
+
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
