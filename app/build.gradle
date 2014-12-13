@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+def appVersionName = '1.0'
+def appVersionCode = 1
+def String applicationIdPackage = 'solutions.rii.kirovogradmobilemeetup2014'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "21.1.1"
+
+    defaultConfig {
+        applicationId applicationIdPackage
+        minSdkVersion 15
+        targetSdkVersion 21
+        versionCode appVersionCode
+        versionName appVersionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            versionNameSuffix '-debug'
+        }
+    }
+    productFlavors {
+
+//        appYourApp {
+//            def name = "appYourApp"
+//            resValue "string", "authority", getAppProviderAuthorityName(name, applicationIdPackage)
+//            buildConfigField "String", "AUTHORITY", '"' + getAppProviderAuthorityName(name, applicationIdPackage) + '"'
+//            buildConfigField "String", "API_DOMAIN", '"' + "http://example.com" + '"'
+//            applicationId getAppPackageName(name, applicationIdPackage)
+//        }
+
+        variantOne {
+            def name = "one"
+            resValue "string", "authority", getAppProviderAuthorityName(name, applicationIdPackage)
+            buildConfigField "String", "AUTHORITY", '"' + getAppProviderAuthorityName(name, applicationIdPackage) + '"'
+            applicationId getAppPackageName(name, applicationIdPackage)
+        }
+
+        variantTwo {
+            def name = "two"
+            def String localApplicationPackageId = "com.myapp"
+            resValue "string", "authority", getAppProviderAuthorityName(name, localApplicationPackageId)
+            buildConfigField "String", "AUTHORITY", '"' + getAppProviderAuthorityName(name, localApplicationPackageId) + '"'
+            buildConfigField "String", "API_DOMAIN", '"' + "http://example.com/" + '"'
+            applicationId getAppPackageName(name, localApplicationPackageId)
+        }
+    }
+}
+
+def String getAppPackageName(String appName, String applicationIdPackage) {
+    return applicationIdPackage + "." + appName
+}
+
+def String getAppProviderAuthorityName(String appName, String applicationIdPackage) {
+    return getAppPackageName(appName, applicationIdPackage) + ".provider.data"
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:21.0.2'
+    compile 'com.google.android.gms:play-services:6.5.87'
+}
